@@ -1,38 +1,51 @@
 {
   "name": "rescribe",
   "productName": "rescribe",
-  "version": "1.0.0",
+  "version": "2.0",
   "description": "Health Care Application",
   "license": "SCORG",
   "author": {
-    "name": "Sagar Jadhav",
+    "name": "Scorg Techonologies",
     "email": "sagar.jadhav@scorgtechnologies.com",
     "url": "http://rescribe.in/"
   },
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/fevicon.png --prune=true --out=release-builds",
-    "package-win": "electron-packager . rescribe --overwrite --asar=true --platform=win32 --arch=x64 --icon=assets/icons/win/icon.ico --no-prune --out=release-builds --version-string.CompanyName=SCORG --version-string.FileDescription=SCORG --version-string.ProductName=\"rescribe\"",
-    "package-linux": "electron-packager . rescribe --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/fevicon.png --prune=true --out=release-builds",
-    "create-installer-mac": "electron-installer-dmg ./release-builds/Rescribe\\ app-darwin-x64/Rescribe\\ app.app rescribe --out=release-builds --overwrite --icon=assets/icons/mac/icon.icns",
-    "create-installer-win": "node installers/windows/createinstaller.js"
+    "publish": "build",
+    "release-build-win": "build -p always",
+    "release-build-mac": "build --mac -p always"
   },
   "devDependencies": {
     "electron": "1.8.3",
-     "electron-builder": "^20.8.2"
+    "electron-builder": "^20.8.2"
   },
   "dependencies": {
     "async": "2.6.0",
+    "electron-isDev": "^0.1.0",
     "electron-log": "^2.2.14",
     "electron-online": "^1.0.0",
     "electron-pdf-window": "^1.0.12",
+    "electron-updater": "^2.21.4",
     "getmac": "^1.4.1",
     "load-json-file": "4.0.0",
     "lodash": "^4.17.5",
     "moment": "^2.22.0",
+    "request": "^2.87.0",
     "user-home": "^2.0.0",
-    "write-json-file": "2.3.0",
-     "electron-updater": "^2.21.4"
+    "write-json-file": "2.3.0"
+  },
+  "build": {
+    "appId": "com.github.scorg.offlineEmr",
+    "mac": {
+      "icon": "./assets/icons/mac/icon.icns",
+      "category": "public.app-category.medical",
+      "identity": "Mac Developer: Anirudh Kulkarni (PLYW34LDTW)",
+      "type": "development",
+      "provisioningProfile": "./RescribeEMRMacProdCertificate.provisionprofile"
+    },
+    "win": {
+      "icon": "./assets/icons/win/icon.ico"
+    }
   }
 }
